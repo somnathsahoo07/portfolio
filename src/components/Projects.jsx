@@ -3,20 +3,22 @@ import { motion, useInView } from 'framer-motion'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
 
 import BarcodeImg from '../assets/Projects/barcode_app.png'
+import ChatAppImg from '../assets/Projects/chatapp.png'
+import JobSyncImg from '../assets/Projects/jobsync.png'
 
 const projects = [
   {
     title: 'QuickDine | Barcode App',
     description: 'QR-Based Ordering: Customers can scan a QR code to access the menu, place orders and track status (e.g, order received, preparing, served) Role-Based System: Owners can assign tasks to managers.',
     image: BarcodeImg,
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux', 'Stripe'],
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux', 'Tailwind.css'],
     github: 'https://github.com/dasjayadev/BarcodeApp',
     live: '#',
   },
   {
     title: 'JobSync AI ',
     description: 'Developed a job tracking platform to manage applications and job postings. Users can add, update, and track job applications in a centralized dashboard Implemented secure authentication with JWT and role-based access.',
-    image: 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: JobSyncImg,
     technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux', 'Tailwind.css', 'JWT'],
     github: 'https://github.com/prasad-bigdp/job-sync',
     live: '#',
@@ -24,7 +26,7 @@ const projects = [
   {
     title: 'Chat App',
     description: 'Built a real-time chat app using MongoDB, Express, React, and Node.js. Implemented user auth with JWT and real-time messaging via Socket.io. Supported 1:1 and group chats with message history.',
-    image: 'https://images.pexels.com/photos/8088453/pexels-photo-8088453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: ChatAppImg,
     technologies: ['React', 'Tailwind.css', 'Node.js', 'Express', 'MongoDB', 'Socket.IO', 'Zustand'],
     github: 'https://github.com/somnathsahoo07/Chat-App',
     live: '#',

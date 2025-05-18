@@ -18,7 +18,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-end">
             <div className="flex gap-4 mb-4">
               <a 
-                href="https://github.com/" 
+                href="https://github.com/somnathsahoo07" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors duration-300 text-xl"
@@ -26,21 +26,21 @@ const Footer = () => {
                 <FiGithub />
               </a>
               <a 
-                href="https://linkedin.com/in/" 
+                href="https://www.linkedin.com/in/somnath-sahoo-814774238/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors duration-300 text-xl"
               >
                 <FiLinkedin />
               </a>
-              <a 
+              {/* <a 
                 href="https://twitter.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors duration-300 text-xl"
               >
                 <FiTwitter />
-              </a>
+              </a> */}
             </div>
             
             <Link

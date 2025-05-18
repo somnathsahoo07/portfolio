@@ -4,38 +4,36 @@ import { FiCalendar, FiMapPin } from 'react-icons/fi'
 
 const educationData = [
   {
-    degree: 'Bachelor of Technology in Computer Science',
-    institution: 'Indian Institute of Technology',
-    location: 'Delhi, India',
-    period: '2018 - 2022',
+    degree: 'Master of Computer Applications',
+    institution: 'Orissa University of Agriculture and Technology',
+    location: 'Bhubaneswar, Odisha, India',
+    period: '2021 - 2023',
     description: 'Studied computer science fundamentals, data structures, algorithms, and software engineering. Participated in various hackathons and coding competitions.',
     achievements: [
-      'Class topper in Data Structures and Algorithms',
       'Led the Web Development Club for 2 years',
-      'Completed research project on Machine Learning applications'
+      'Completed research project on Web Development'
     ]
   },
   {
-    degree: 'Full Stack Web Development Bootcamp',
-    institution: 'Coding Ninjas',
-    location: 'Online',
-    period: '2021',
-    description: 'Intensive program focused on MERN stack development. Built several full-stack applications and collaborated with other developers on team projects.',
+    degree: 'Bachelor of Science (BSc) in Physics Hons.',
+    institution: 'Utkal University',
+    location: 'Bhubaneswar, Odisha, India',
+    period: '2018-2021',
+    description: 'In-depth study of physics, mathematics, and computer science. Developed strong analytical and problem-solving skills.',
     achievements: [
-      'Developed an e-commerce platform as capstone project',
-      'Received the "Best Final Project" award',
-      'Mentored junior developers during group projects'
+      'Graduated with first class honors',
+      'Participated in inter-college coding competitions'
     ]
+   
   },
   {
     degree: 'Higher Secondary Education',
-    institution: 'Delhi Public School',
-    location: 'Delhi, India',
+    institution: 'Gandhi +2 Scinence College',
+    location: 'Bhubaneswar, Odisha, India',
     period: '2016 - 2018',
     description: 'Focused on Mathematics, Physics, Chemistry and Computer Science. Participated in various technical and cultural events.',
     achievements: [
       'School topper in Computer Science',
-      'Won first prize in inter-school web design competition',
       "Led the school programming club"
     ]
   }
