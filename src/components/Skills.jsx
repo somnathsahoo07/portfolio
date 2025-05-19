@@ -7,6 +7,7 @@ import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaGithub } f
 import { IoLogoJavascript } from 'react-icons/io5'
 import { SiMongodb, SiExpress, SiTailwindcss, SiRedux, SiNextdotjs, SiFirebase, SiTypescript } from 'react-icons/si'
 import { FaAws } from 'react-icons/fa'
+import ClickSpark from './ClickSpark'
 
 const skills = [
   { name: 'ReactJS', icon: <FaReact size={40} className="text-blue-400" />, level: 90 },
@@ -68,85 +69,91 @@ const Skills = () => {
   }
 
   return (
-    <section id="skills" className="bg-dark-200 py-20">
-      <div className="section-container" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="section-title mx-auto inline-block after:left-1/2 after:-translate-x-1/2">
-            My <span className="gradient-text">Skills</span>
-          </h2>
-          <p className="text-gray-400 max-w-3xl mx-auto mt-4">
-            I have experience with various technologies in the web development ecosystem.
-            Here are the key skills and technologies I work with:
-          </p>
-        </motion.div>
-        
-        {/* Skill Carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-16"
-        >
-          <Slider {...sliderSettings}>
-            {skills.map((skill, index) => (
-              <div key={skill.name} className="px-2">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className="card flex flex-col items-center p-6 h-[180px]"
-                >
-                  <div className="mb-4">{skill.icon}</div>
-                  <h3 className="text-lg font-semibold mb-3">{skill.name}</h3>
-                  <div className="w-full bg-dark-300 h-2 rounded-full overflow-hidden">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                      transition={{ duration: 1, delay: 0.5 + (0.1 * index) }}
-                      className="h-full bg-gradient-to-r from-primary-500 to-accent-500"
-                    ></motion.div>
-                  </div>
-                </motion.div>
-              </div>
+    <ClickSpark
+      sparkColor="#6D28D9"
+      sparkSize={10}
+      sparkRadius={15}
+      sparkCount={8}
+      duration={400}
+    >
+      <section id="skills" className="bg-dark-200 py-20">
+        <div className="section-container" ref={ref}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="section-title mx-auto inline-block after:left-1/2 after:-translate-x-1/2">
+              My <span className="gradient-text">Skills</span>
+            </h2>
+            <p className="text-gray-400 max-w-3xl mx-auto mt-4">
+              I have experience with various technologies in the web development ecosystem.
+              Here are the key skills and technologies I work with:
+            </p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-16"
+          >
+            <Slider {...sliderSettings}>
+              {skills.map((skill, index) => (
+                <div key={skill.name} className="px-2">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.5, delay: 0.1 * index }}
+                    className="card flex flex-col items-center p-6 h-[180px]"
+                  >
+                    <div className="mb-4">{skill.icon}</div>
+                    <h3 className="text-lg font-semibold mb-3">{skill.name}</h3>
+                    <div className="w-full bg-dark-300 h-2 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
+                        transition={{ duration: 1, delay: 0.5 + (0.1 * index) }}
+                        className="h-full bg-gradient-to-r from-primary-500 to-accent-500"
+                      ></motion.div>
+                    </div>
+                  </motion.div>
+                </div>
+              ))}
+            </Slider>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {skillCategories.map((category, categoryIndex) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.3 * categoryIndex }}
+                className="card"
+              >
+                <h3 className="text-xl font-semibold mb-6 gradient-text">{category.title}</h3>
+                <ul className="space-y-3">
+                  {category.skills.map((skillName) => {
+                    const skill = skills.find(s => s.name === skillName)
+                    return (
+                      <li key={skillName} className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm">{skill?.icon}</span>
+                          <span>{skillName}</span>
+                        </div>
+                        <span className="text-sm text-gray-400">{skill?.level}%</span>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </motion.div>
             ))}
-          </Slider>
-        </motion.div>
-        
-        {/* Skill Categories */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.3 * categoryIndex }}
-              className="card"
-            >
-              <h3 className="text-xl font-semibold mb-6 gradient-text">{category.title}</h3>
-              <ul className="space-y-3">
-                {category.skills.map((skillName) => {
-                  const skill = skills.find(s => s.name === skillName)
-                  return (
-                    <li key={skillName} className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm">{skill?.icon}</span>
-                        <span>{skillName}</span>
-                      </div>
-                      <span className="text-sm text-gray-400">{skill?.level}%</span>
-                    </li>
-                  )
-                })}
-              </ul>
-            </motion.div>
-          ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </ClickSpark>
   )
 }
 

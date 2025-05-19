@@ -49,7 +49,6 @@ const Navbar = () => {
             <span className="text-2xl font-bold gradient-text">Somnath Sahoo</span>
           </motion.div>
           
-          {/* Desktop Navigation */}
           <motion.nav 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,7 +71,6 @@ const Navbar = () => {
             ))}
           </motion.nav>
           
-          {/* Mobile Navigation Toggle */}
           <div className="md:hidden">
             <button 
               onClick={toggleMenu}
@@ -85,7 +83,6 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation Menu */}
       <motion.div 
         initial={{ height: 0, opacity: 0 }}
         animate={{ 
