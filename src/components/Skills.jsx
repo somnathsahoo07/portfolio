@@ -23,14 +23,13 @@ const skills = [
   { name: 'AWS', icon: <FaAws size={40} className="text-yellow-500" />, level: 70 },
   { name: 'Firebase', icon: <SiFirebase size={40} className="text-orange-400" />, level: 80 },
   { name: 'Git', icon: <FaGitAlt size={40} className="text-red-500" />, level: 85 },
-  { name: 'Docker', icon: <FaDocker size={40} className="text-blue-400" />, level: 70 },
   { name: 'Github', icon: <FaGithub size={40} className="text-gray-400" />, level: 85 },
 ]
 
 const skillCategories = [
   { title: 'Frontend', skills: ['ReactJS', 'JavaScript', 'HTML5', 'CSS3', 'TypeScript' ,'TailwindCSS', 'Redux', 'NextJS'] },
   { title: 'Backend', skills: ['NodeJS', 'ExpressJS', 'MongoDB'] },
-  { title: 'DevOps & Tools', skills: ['Git', 'AWS', 'Firebase', 'Github'] }
+  { title: 'Tools', skills: ['Git', 'AWS', 'Firebase', 'Github'] }
 ]
 
 const Skills = () => {

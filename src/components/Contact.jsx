@@ -264,7 +264,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows="4"
-                    className="input-field"
+                    className="input-field resize-none"
                     placeholder="Hello, I'd like to discuss a project..."
                   ></textarea>
                 </div>
