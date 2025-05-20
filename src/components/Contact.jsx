@@ -165,7 +165,6 @@ const Contact = () => {
                 ))}
               </div>
 
-              {/* Social Links */}
               <div>
                 <h3 className="text-xl font-semibold mb-4">Follow Me</h3>
                 <div className="flex gap-4">
