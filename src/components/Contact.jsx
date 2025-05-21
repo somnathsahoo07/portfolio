@@ -75,26 +75,42 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      const templateParams = {
+        to_name: "Somnath", 
         from_name: formData.name,
-        from_email: formData.email,
+        reply_to: formData.email,
         subject: formData.subject,
         message: formData.message,
-      });
+      };
 
-      setSubmitStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
+      
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      if (response.status === 200) {
+        setSubmitStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        throw new Error("Failed to send message");
+      }
     } catch (error) {
       console.error("Email error:", error);
       setSubmitStatus("error");
+      
+      alert(
+        `Error: ${error.message || "Failed to send message. Please try again."}`
+      );
     } finally {
       setIsSubmitting(false);
-
       setTimeout(() => {
         setSubmitStatus(null);
       }, 5000);
