@@ -47,7 +47,13 @@ const socialLinks = [
 
 const Contact = () => {
   useEffect(() => {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    // Add more detailed error handling for initialization
+    try {
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+      console.log('EmailJS initialized successfully');
+    } catch (error) {
+      console.error('EmailJS initialization error:', error);
+    }
   }, []);
 
   const [formData, setFormData] = useState({
@@ -74,22 +80,37 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      console.error('EmailJS configuration missing');
+      setSubmitStatus('error');
+      alert('Email service configuration is missing. Please check your environment variables.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const templateParams = {
-        to_name: "Somnath", 
+        to_name: "Somnath",
         from_name: formData.name,
         reply_to: formData.email,
         subject: formData.subject,
         message: formData.message,
       };
 
-      
+      console.log('Sending email with params:', {
+        serviceId: EMAILJS_SERVICE_ID,
+        templateId: EMAILJS_TEMPLATE_ID,
+        hasPublicKey: !!EMAILJS_PUBLIC_KEY
+      });
+
       const response = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams,
         EMAILJS_PUBLIC_KEY
       );
+
+      console.log('EmailJS Response:', response);
 
       if (response.status === 200) {
         setSubmitStatus("success");
@@ -100,20 +121,18 @@ const Contact = () => {
           message: "",
         });
       } else {
-        throw new Error("Failed to send message");
+        throw new Error(`Failed to send message: ${response.text}`);
       }
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Email error details:", {
+        message: error.message,
+        stack: error.stack,
+        text: error.text
+      });
       setSubmitStatus("error");
-      
-      alert(
-        `Error: ${error.message || "Failed to send message. Please try again."}`
-      );
+      alert(`Failed to send message: ${error.message}. Please try again or contact directly via email.`);
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
     }
   };
 
