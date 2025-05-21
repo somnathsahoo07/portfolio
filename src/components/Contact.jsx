@@ -47,7 +47,6 @@ const socialLinks = [
 
 const Contact = () => {
   useEffect(() => {
-    // Add more detailed error handling for initialization
     try {
       emailjs.init(EMAILJS_PUBLIC_KEY);
       console.log('EmailJS initialized successfully');
@@ -83,7 +82,6 @@ const Contact = () => {
     if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
       console.error('EmailJS configuration missing');
       setSubmitStatus('error');
-      alert('Email service configuration is missing. Please check your environment variables.');
       setIsSubmitting(false);
       return;
     }
