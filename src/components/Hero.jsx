@@ -95,7 +95,7 @@ const Hero = () => {
                 className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
               >
                 <a 
-                  href="/documents/Resume.pdf" 
+                  href="/documents/NewResume.pdf"
                   download="Somnath_Sahoo_Resume.pdf"
                   className="btn btn-primary flex items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
                 >
