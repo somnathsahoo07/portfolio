@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-scroll'
 import { FiDownload, FiArrowRight, FiChevronDown } from 'react-icons/fi'
+import { FaReact, FaNodeJs } from 'react-icons/fa'
+import { SiMongodb, SiExpress } from 'react-icons/si'
 import Particles from './particles'
 import ClickSpark from './ClickSpark'
-import Magnet from './Magnet'
 
 import selfImg from '../assets/Som_profile1.jpg'
 
@@ -93,27 +94,23 @@ const Hero = () => {
                 transition={{ delay: 1.1, duration: 0.8 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
               >
-                <Magnet>
-                  <a 
-                    href="/documents/Resume.pdf" 
-                    download="Somnath_Sahoo_Resume.pdf"
-                    className="btn btn-primary flex items-center justify-center gap-2"
-                  >
-                    <FiDownload /> Resume
-                  </a>
-                </Magnet>
-                <Magnet>
-                  <Link
-                    to="contact"
-                    spy={true}
-                    smooth={true}
-                    offset={-70}
-                    duration={700}
-                    className="btn btn-secondary flex items-center justify-center gap-2"
-                  >
-                    Hire Me <FiArrowRight />
-                  </Link>
-                </Magnet>
+                <a 
+                  href="/documents/Resume.pdf" 
+                  download="Somnath_Sahoo_Resume.pdf"
+                  className="btn btn-primary flex items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
+                >
+                  <FiDownload /> Resume
+                </a>
+                <Link
+                  to="contact"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={700}
+                  className="btn btn-secondary flex items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
+                >
+                  Hire Me <FiArrowRight />
+                </Link>
               </motion.div>
             </motion.div>
             
@@ -125,28 +122,79 @@ const Hero = () => {
             >
               <div className="relative">
                 <div className="w-full h-[400px] rounded-2xl bg-gradient-to-br from-primary-600/20 via-accent-600/20 to-secondary-600/20 flex items-center justify-center overflow-hidden">
-                  <div className="w-[250px] h-[250px] rounded-full bg-gradient-to-br from-primary-600 to-accent-600 flex items-center justify-center animate-float shadow-glow">
-                    <div className="text-white text-6xl font-bold">
-                      <img
-                         className='w-full h-full rounded-full object-cover overflow-hidden'
-                      src={selfImg} alt="img" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 via-accent-600/10 to-secondary-600/10 animate-gradient-xy"></div>
+                  
+                  <motion.div 
+                    className="relative w-[250px] h-[250px] rounded-full"
+                    animate={{ y: [-5, 5, -5] }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-500 via-accent-500 to-secondary-500 animate-spin-slow blur-xl opacity-50"></div>
+                    <div className="relative w-full h-full rounded-full bg-gradient-to-br from-primary-600 to-accent-600 p-1">
+                      <div className="w-full h-full rounded-full overflow-hidden backdrop-blur-sm">
+                        <img
+                          className="w-full h-full rounded-full object-cover transform hover:scale-110 transition-transform duration-500"
+                          src={selfImg}
+                          alt="Profile"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
                 
-                {['MongoDB', 'Express', 'React', 'Node.js'].map((tech, index) => (
-                  <div 
-                    key={tech}
-                    className="absolute bg-dark-200 rounded-lg shadow-md px-3 py-2 text-sm font-medium"
+                {[
+                  { icon: <SiMongodb className="text-green-500" size={32} />, name: 'MongoDB', marginTop: '20px' },
+                  { icon: <SiExpress className="text-white" size={32} />, name: 'Express' },
+                  { icon: <FaReact className="text-blue-400" size={32} />, name: 'React' },
+                  { icon: <FaNodeJs className="text-green-600" size={32} />, name: 'Node.js' }
+                ].map((tech, index) => (
+                  <motion.div 
+                    key={tech.name}
+                    className="absolute bg-dark-200/80 backdrop-blur-sm rounded-full shadow-lg p-3 cursor-pointer
+                             hover:shadow-glow hover:shadow-accent-500/50 transition-all duration-300"
                     style={{
                       top: `${index * 25}%`,
                       right: index % 2 === 0 ? '10%' : 'auto',
                       left: index % 2 === 1 ? '10%' : 'auto',
-                      animationDelay: `${index * 0.2}s`
+                      marginTop: tech.marginTop || 0,
+                    }}
+                    animate={{
+                      y: [-3, 3, -3],
+                      x: [-2, 2, -2],
+                    }}
+                    transition={{
+                      y: {
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.2,
+                      },
+                      x: {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.3,
+                      }
+                    }}
+                    whileHover={{
+                      scale: 1.2,
+                      y: 0,
+                      x: 0,
+                      transition: { duration: 0.2 }
                     }}
                   >
-                    {tech}
-                  </div>
+                    <div className="relative group">
+                      {tech.icon}
+                      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100
+                                  bg-dark-100 text-white px-2 py-1 rounded text-sm whitespace-nowrap transition-opacity">
+                        {tech.name}
+                      </div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

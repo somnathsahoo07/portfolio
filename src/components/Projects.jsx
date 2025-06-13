@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useAnimation } from 'framer-motion'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
 
 import BarcodeImg from '../assets/Projects/barcode_app.png'
@@ -70,49 +70,70 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.5, delay: 0.2 * index }}
-                className="overflow-hidden rounded-xl bg-dark-200 shadow-md hover:shadow-glow transition-all duration-300 group"
+                whileHover={{ y: -5 }}
+                className="overflow-hidden rounded-xl bg-dark-200 shadow-md hover:shadow-glow 
+                         transition-all duration-300 group backdrop-blur-sm 
+                         hover:bg-gradient-to-b hover:from-primary-600/10 hover:to-accent-600/10"
               >
-                <div className="h-56 overflow-hidden relative">
-                  <img 
+                <div className="h-56 overflow-hidden relative group">
+                  <motion.img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover object-center transition-transform duration-700"
+                    whileHover={{ scale: 1 }}
+                    initial={{ scale: 1.2 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-300 to-transparent opacity-60"></div>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-dark-300 via-dark-300/50 to-transparent
+                             flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    whileHover={{ opacity: 1 }}
+                  >
+                    <motion.span 
+                      className="text-white text-lg font-semibold px-4 py-2 rounded-full 
+                               bg-primary-500/80 backdrop-blur-sm"
+                      initial={{ y: 20, opacity: 0 }}
+                      whileHover={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      View Project
+                    </motion.span>
+                  </motion.div>
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-primary-400 to-accent-400 
+                               bg-clip-text text-transparent">{project.title}</h3>
                   <p className="text-gray-400 mb-4">{project.description}</p>
                   
                   <div className="mb-4 flex flex-wrap gap-2">
-                    {project.technologies.map(tech => (
-                      <span 
+                    {project.technologies.map((tech, techIndex) => (
+                      <motion.span 
                         key={tech} 
-                        className="px-2 py-1 bg-primary-900/40 text-primary-300 text-xs rounded-lg"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.1 * techIndex }}
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        className="px-3 py-1 bg-primary-900/40 text-primary-300 text-xs rounded-full
+                                 border border-primary-500/20 hover:border-primary-500/50 transition-colors"
                       >
                         {tech}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                   
                   <div className="flex justify-between items-center mt-4">
-                    <a 
+                    <motion.a 
                       href={project.github}
-                      className="flex items-center gap-1 text-gray-400 hover:text-primary-400 transition-colors duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      className="flex items-center gap-2 text-gray-400 hover:text-primary-400 
+                               transition-colors duration-300 px-4 py-2 rounded-lg 
+                               hover:bg-primary-500/10"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <FiGithub /> Code
-                    </a>
-                    {/* <a 
-                      href={project.live}
-                      className="flex items-center gap-1 text-gray-400 hover:text-primary-400 transition-colors duration-300"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FiExternalLink /> Live Demo
-                    </a> */}
+                      <FiGithub className="text-lg" /> 
+                      <span>View Code</span>
+                    </motion.a>
                   </div>
                 </div>
               </motion.div>
@@ -125,13 +146,22 @@ const Projects = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="text-center mt-12"
           >
-            <a 
+            <motion.a 
               href="https://github.com/somnathsahoo07" 
-              target='_blank'
-              className="btn btn-primary inline-flex items-center gap-2"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn btn-primary inline-flex items-center gap-2 relative overflow-hidden
+                       group hover:shadow-glow transition-all duration-300"
             >
-              View All Projects <FiExternalLink />
-            </a>
+              <span className="relative z-10">View All Projects</span>
+              <FiExternalLink className="relative z-10 group-hover:rotate-45 transition-transform duration-300" />
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 opacity-0 
+                         group-hover:opacity-100 transition-opacity duration-300"
+              />
+            </motion.a>
           </motion.div>
         </div>
       </section>

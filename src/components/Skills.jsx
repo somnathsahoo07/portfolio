@@ -42,7 +42,7 @@ const Skills = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 5,
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true,
@@ -51,18 +51,21 @@ const Skills = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 4,
+          slidesToScroll: 4,
         }
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 3,
         }
       },
       {
         breakpoint: 640,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 2,
         }
       }
     ]
@@ -76,8 +79,8 @@ const Skills = () => {
       sparkCount={8}
       duration={400}
     >
-      <section id="skills" className="bg-dark-200 py-20">
-        <div className="section-container" ref={ref}>
+      <section id="skills" className="bg-dark-200 py-20 relative overflow-hidden">
+        <div className="section-container relative z-10" ref={ref}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -93,12 +96,7 @@ const Skills = () => {
             </p>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-16"
-          >
+          <motion.div className="mb-16">
             <Slider {...sliderSettings}>
               {skills.map((skill, index) => (
                 <div key={skill.name} className="px-2">
@@ -106,17 +104,40 @@ const Skills = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.5, delay: 0.1 * index }}
-                    className="card flex flex-col items-center p-6 h-[180px]"
+                    whileHover={{ 
+                      scale: 1.05,
+                      boxShadow: "0 0 25px rgba(99, 102, 241, 0.2)",
+                    }}
+                    className="card flex flex-col items-center p-6 h-[180px] backdrop-blur-sm bg-dark-200/50
+                             hover:bg-gradient-to-b hover:from-primary-600/20 hover:to-accent-600/20 
+                             transition-all duration-300"
                   >
-                    <div className="mb-4">{skill.icon}</div>
-                    <h3 className="text-lg font-semibold mb-3">{skill.name}</h3>
+                    <motion.div 
+                      className="mb-4"
+                      animate={{ 
+                        y: [0, -5, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.2
+                      }}
+                    >
+                      {skill.icon}
+                    </motion.div>
+                    <h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-primary-400 to-accent-400 
+                                 bg-clip-text text-transparent">{skill.name}</h3>
                     <div className="w-full bg-dark-300 h-2 rounded-full overflow-hidden">
                       <motion.div 
                         initial={{ width: 0 }}
                         animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                        transition={{ duration: 1, delay: 0.5 + (0.1 * index) }}
-                        className="h-full bg-gradient-to-r from-primary-500 to-accent-500"
-                      ></motion.div>
+                        transition={{ duration: 1.5, delay: 0.5 + (0.1 * index) }}
+                        className="h-full bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500 
+                                 animate-gradient-x relative"
+                      >
+                        <div className="absolute top-0 right-0 h-full w-2 bg-white/20 blur-sm"></div>
+                      </motion.div>
                     </div>
                   </motion.div>
                 </div>
@@ -131,20 +152,35 @@ const Skills = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.3 * categoryIndex }}
-                className="card"
+                whileHover={{ scale: 1.02 }}
+                className="card backdrop-blur-sm bg-dark-200/50 hover:bg-gradient-to-b 
+                         hover:from-primary-600/20 hover:to-accent-600/20 transition-all duration-300"
               >
                 <h3 className="text-xl font-semibold mb-6 gradient-text">{category.title}</h3>
                 <ul className="space-y-3">
-                  {category.skills.map((skillName) => {
+                  {category.skills.map((skillName, skillIndex) => {
                     const skill = skills.find(s => s.name === skillName)
                     return (
-                      <li key={skillName} className="flex items-center justify-between">
+                      <motion.li
+                        key={skillName}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3, delay: 0.1 * skillIndex }}
+                        className="flex items-center justify-between p-2 rounded-lg
+                                 hover:bg-primary-600/10 transition-colors duration-300"
+                      >
                         <div className="flex items-center gap-2">
-                          <span className="text-sm">{skill?.icon}</span>
+                          <motion.span 
+                            className="text-sm"
+                            whileHover={{ scale: 1.2, rotate: 360 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            {skill?.icon}
+                          </motion.span>
                           <span>{skillName}</span>
                         </div>
                         <span className="text-sm text-gray-400">{skill?.level}%</span>
-                      </li>
+                      </motion.li>
                     )
                   })}
                 </ul>

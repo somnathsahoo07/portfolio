@@ -91,6 +91,7 @@ export default {
         wave: 'wave 2s ease-in-out infinite',
         float: 'float 4s ease-in-out infinite',
         shimmer: 'shimmer 8s ease-in-out infinite',
+        'spin-slow': 'spin 8s linear infinite',
       },
     },
   },
